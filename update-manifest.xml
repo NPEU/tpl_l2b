@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<updates>
+    <update>
+        <name>NPEU: tpl_l2b</name>
+        <description>Joomla! tpl_l2b template</description>
+        <element>l2b</element>
+        <type>template</type>
+        <version>0.0.1</version>
+        <client>site</client>
+        <infourl title="NPEU: tpl_l2b">https://github.com/NPEU/tpl_l2b/releases/tag/v0.0.1</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/NPEU/tpl_l2b/archive/v0.0.1.zip</downloadurl>
+        </downloads>
+        <targetplatform name="joomla" />
+        <tags>
+            <tag>stable</tag>
+        </tags>
+    </update>
+</updates>

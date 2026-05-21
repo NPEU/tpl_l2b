@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="template" client="site">
+
+    <name>l2b</name>
+    <author>Andy Kirk</author>
+    <authorEmail>andy.kirk@npeu.ox.ac.uk</authorEmail>
+    <authorUrl>https://www.npeu.ox.ac.uk</authorUrl>
+    <creationDate>April 2026</creationDate>
+    <copyright>(C) NPEU 2026</copyright>
+    <license>MIT License; see LICENSE.md</license>
+
+    <!--  The version string is recorded in the components table -->
+    <version>0.0.1</version>
+    <!-- The description is optional and defaults to the name -->
+    <description>TPL_L2B_DESCRIPTION</description>
+
+    <updateservers>
+        <!-- Note: No spaces or linebreaks allowed between the server tags -->
+        <server type="extension" name="NPEU: tpl_l2b Update Site">https://raw.githubusercontent.com/NPEU/tpl_l2b/master/update-manifest.xml</server>
+    </updateservers>
+
+    <namespace path="src">NPEU\Template\L2b</namespace>
+
+    <files>
+        <folder>css</folder>
+        <folder>html</folder>
+        <folder>js</folder>
+        <folder>language</folder>
+        <folder>layouts</folder>
+        <folder>src</folder>
+        <filename>error.php</filename>
+        <filename>index.php</filename>
+        <filename>offline.php</filename>
+        <filename>setup.php</filename>
+        <filename>templateDetails.xml</filename>
+    </files>
+
+
+    <positions>
+        <position>1-top-cookie-control</position>
+        <position>1-top</position>
+        <position>2-header-nav-bar</position>
+        <position>3-main-breadcrumbs</position>
+        <position>3-main-toc</position>
+        <position>3-main</position>
+        <position>4-footer</position>
+    </positions>
+
+    <config>
+        <fields
+            name="params"
+        >
+            <fieldset
+                name="main"
+                label="TPL_L2B_MAIN_LEGEND"
+            >
+                <field
+                    name="site_title"
+                    type="text"
+                    default=""
+                    label="TPL_L2B_MAIN_SITETITLE_LABEL"
+                    description="TPL_L2B_MAIN_SITETITLE_DESC"
+                    filter="string"
+                />
+                <field
+                    name="site_description"
+                    type="text"
+                    default=""
+                    label="TPL_L2B_MAIN_SITEDESC_LABEL"
+                    description="TPL_L2B_MAIN_SITEDESC_DESC"
+                    filter="string"
+                />
+            </fieldset>
+            <fieldset
+                name="page_footer"
+                label="TPL_L2B_FOOTER_LEGEND"
+            >
+                <field
+                    name="footer_text"
+                    type="textarea"
+                    default=""
+                    label="TPL_L2B_FOOTER_TEXT_LABEL"
+                    description="TPL_L2B_FOOTER_TEXT_DESC"
+                    filter="string"
+                />
+            </fieldset>
+        </fields>
+    </config>
+
+</extension>

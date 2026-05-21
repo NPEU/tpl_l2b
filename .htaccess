@@ -1,0 +1,35 @@
+# ------------------------------------------------------------------------------
+# | Modified Filename-based cache busting for Minify.php                       |
+# ------------------------------------------------------------------------------
+
+
+# Modified to allow cache busting compatible with Minify
+<IfModule mod_rewrite.c>
+    # Images
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)\.(\d+)\.(png|jpg|gif)$ $1.$3 [L]
+
+    # css/js groups
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteRule .+/(.+-)group\.(\d+)\.(css|js)$ min/g=$1$3&123 [L]
+
+    # css/js files
+    #RewriteCond %{REQUEST_FILENAME} !-f
+    #RewriteCond %{REQUEST_FILENAME} !-d
+    #RewriteRule (.+)\.(\d+)\.(css|js)$ min/f=$1.$3&$2 [L]
+
+
+    # css files (Grunt based).
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.+)\.(\d+)(\.min.css)$ $1$3 [L]
+    RewriteRule (.+)\.(\d+)(\.css)$ $1$3 [L]
+
+    # js files (Grunt based).
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.+)\.(\d+)(\.min.js)$ $1$3 [L]
+    RewriteRule (.+)\.(\d+)(\.js)$ $1$3 [L]
+</IfModule>
