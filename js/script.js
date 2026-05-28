@@ -360,12 +360,14 @@ var $flbk = {};
             var accepted_cookies = readCookie(cookie_name);
             var accepted_member_cookies = readCookie(member_cookie_name);
             var body_el = document.getElementsByTagName('body')[0];
-
-            if (document.is_member && !accepted_member_cookies) {
-                body_el.insertAdjacentHTML('afterbegin', member_cookie_html);
+            console.log('is member: ' + document.isMember);
+            console.log('accepted_member_cookies: ' + accepted_member_cookies);
+            if (document.isMember && !accepted_member_cookies) {
+                body_el.insertAdjacentHTML('afterbegin', member_cookie_html_classes);
 
                 document.getElementById(cookie_button_id).onclick = function(){
                     createCookie(member_cookie_name, 'true', cookie_expire_days);
+                    createCookie(cookie_name, 'true', cookie_expire_days);
                     document.getElementById(cookie_notice_id).setAttribute('data-close', true);
                     //document.getElementById(cookie_notice_id).className += '  ' + cookie_close_class;
                     /*
