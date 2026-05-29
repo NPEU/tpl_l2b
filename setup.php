@@ -121,13 +121,14 @@ $menu_root_item = $app->getMenu()->getItem($menu_root_id);
 #####echo '<pre>'; var_dump($user->authorise("core.edit", "com_menus.menu." . $menu_id)); echo '</pre>'; exit;
 
 // Work out if current page is a route of a component or not;
-$menu_route = trim($menu_item->route, '/');
-$uri_route  = trim($uri->getPath(), '/');
+#$menu_route = trim($menu_item->route, '/');
+#$uri_route  = trim($uri->getPath(), '/');
 
 #echo '<pre>'; var_dump($menu_route); echo '</pre>'; #exit;
 #echo '<pre>'; var_dump($uri_route); echo '</pre>'; exit;
 
-$page_is_subroute = ($menu_route == $uri_route) ? false : true;
+#$page_is_subroute = ($menu_route == $uri_route) ? false : true;
+$page_is_subroute = TplL2BHelper::is_page_subroute();
 
 
 $main_breadcumbs      = trim(HTMLHelper::_('content.prepare', '{loadposition 3-main-breadcrumbs,basic}'));
@@ -225,12 +226,13 @@ $page_template_params = $page_template->params->toObject();
 
 // Page Heading / Title
 $page_heading = $menu_item->title;
-/*$page_heading = isset($doc->article)
+$page_heading = isset($doc->article)
               ? $doc->article->title
               : $menu_item->title;
-if (isset($doc->page_heading_additional)) {
+/*if (isset($doc->page_heading_additional)) {
     $page_heading .= $doc->page_heading_additional;
 }*/
+#echo '<pre>'; var_dump($page_heading); echo '</pre>'; exit;
 $page_title = $page_heading;
 
 // Menu Items can override the heading / title in 'Page Display' tab:
@@ -479,9 +481,9 @@ if ($page_script !== '') {
 #echo '<pre>'; var_dump($page_stylesheets); echo '</pre>'; #exit;
 #echo '<pre>'; var_dump($page_style); echo '</pre>'; #exit;
 #echo '<pre>'; var_dump($page_scripts); echo '</pre>'; exit;
-#echo '<pre>'; print_r($page_script); echo '</pre>'; exit;
 
 
+$comments_enabled = TplL2BHelper::has_comments_enabled();
 
 
 // Navbar:

@@ -564,6 +564,14 @@ $pageclass = empty($pageclass) ? '' : '  ' . $pageclass;
 
     <?php endif; ?>
 
+    <?php if ($comments_enabled) : ?>
+    <!-- Joomla WA -->
+    <jdoc:include type="metas" />
+    <jdoc:include type="styles" />
+    <jdoc:include type="scripts" />
+    <!-- End Joomla WA -->
+    <?php endif; ?>
+
     <!--<![endif]-->
 
 <?php /*

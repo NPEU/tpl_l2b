@@ -11,8 +11,11 @@ namespace NPEU\Template\L2b\Site\Helper;
 #echo '<pre>'; var_dump($_SERVER); echo '</pre>'; exit;
 defined('_JEXEC') or die;
 
+
+use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Document\Renderer\Html\MessageRenderer;
 use Joomla\CMS\Factory;
+use Joomla\CMS\Uri\Uri;
 
 //require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
 
@@ -355,6 +358,40 @@ class L2BHelper
             self::$template = $template;
         }
         return self::$template;
+    }
+
+    /**
+     * Work out if current page is a route of a component or not
+     *
+     * @return object
+     */
+    public static function is_page_subroute()
+    {
+        $uri        = Uri::getInstance();
+        $menu_item  = self::get_menu_item();
+        $menu_route = trim($menu_item->route, '/');
+        $uri_route  = trim($uri->getPath(), '/');
+
+        return ($menu_route == $uri_route) ? false : true;
+    }
+
+
+
+    /**
+     * Does the menu item have comments enabled?
+     *
+     * @return object
+     */
+    public static function has_comments_enabled()
+    {
+        $menu_item = self::get_menu_item();
+        $commentbox_params = ComponentHelper::getParams('com_commentbox');
+
+        if ($menu_item->id && \in_array($menu_item->id, $commentbox_params->get('exclusions', []))) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

@@ -17,5 +17,5 @@ use Joomla\CMS\Language\Text;
     <span class="icon-eye icon-fw" aria-hidden="true"></span>
     <meta content="UserPageVisits:<?php echo $displayData['item']->hits; ?>">
     <?php #echo Text::sprintf('COM_CONTENT_ARTICLE_HITS', $displayData['item']->hits); ?>
-    <?php echo Text::sprintf('Views: %s', $displayData['item']->hits); ?>
+    <?php echo Text::sprintf('<span class="text-group">Views:</span> <b class="text-group">%s</b>', $displayData['item']->hits); ?>
 </dd>

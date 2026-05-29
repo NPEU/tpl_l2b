@@ -20,9 +20,9 @@ use Joomla\CMS\Language\Text;
     <?php $author = '<span>' . $author . '</span>'; ?>
     <?php if (!empty($displayData['item']->contact_link) && $displayData['params']->get('link_author')) : ?>
         <?php #echo Text::sprintf('COM_CONTENT_WRITTEN_BY', HTMLHelper::_('link', $displayData['item']->contact_link, $author)); ?>
-        <?php echo Text::sprintf('Posted by: %s', HTMLHelper::_('link', $displayData['item']->contact_link, $author)); ?>
+        <?php echo Text::sprintf('<span class="text-group">Posted by: %s', HTMLHelper::_('link', $displayData['item']->contact_link, $author)); ?>
     <?php else : ?>
         <?php #echo Text::sprintf('COM_CONTENT_WRITTEN_BY', $author); ?>
-        <?php echo Text::sprintf('Posted by: %s', $author); ?>
+        <?php echo Text::sprintf('<span class="text-group">Posted by:</span> <b class="text-group">%s</b>', $author); ?>
     <?php endif; ?>
 </dd>

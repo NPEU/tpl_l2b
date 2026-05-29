@@ -20,6 +20,53 @@ use Joomla\CMS\Router\Route;
 use Joomla\CMS\Uri\Uri;
 use Joomla\Component\Content\Administrator\Extension\ContentComponent;
 use Joomla\Component\Content\Site\Helper\RouteHelper;
+use Joomla\Database\DatabaseInterface;
+
+#use NPEU\Plugin\Content\TopicReplies\Helper\TopicRepliesHelper;
+use NPEU\Template\L2b\Site\Helper\L2BHelper as TplL2BHelper;
+
+$comments_enabled = TplL2BHelper::has_comments_enabled();
+
+
+/*
+$replies = [];
+#$replyUrl = false;
+
+#echo '<pre>'; var_dump($this->item->catid); echo '</pre>';
+
+if (TopicRepliesHelper::isDiscussionBoard((int) $this->item->catid)) {
+
+    $topic = $this->item;
+
+    #https://l2bdev.npeu.ox.ac.uk/component/content?task=article.add&return=aHR0cHM6Ly9sMmJkZXYubnBldS5veC5hYy51ay9kaXNjdXNzaW9uLWJvYXJk&a_id=0&catid=8
+    #$replyUrl = Route::_('index.php?option=com_content&view=form&layout=edit&replyto=' . (int) $topic->id);
+    #$replyUrl = Route::_('index.php?option=com_content&task=article.add&replyto=' . (int) $topic->id);
+
+    $db = Factory::getContainer()->get(DatabaseInterface::class);
+
+    $replyCatId = (int) $db->setQuery(
+        $db->getQuery(true)
+            ->select($db->quoteName('reply_category_id'))
+            ->from($db->quoteName('#__topic_replies'))
+            ->where($db->quoteName('topic_article_id') . ' = ' . (int) $topic->id)
+    )->loadResult();
+
+#echo '<pre>'; var_dump($replyCatId); echo '</pre>';
+    if ($replyCatId > 0) {
+        $query = $db->getQuery(true)
+            ->select('*')
+            ->from($db->quoteName('#__content'))
+            ->where($db->quoteName('catid') . ' = ' . (int) $replyCatId)
+            ->where($db->quoteName('state') . ' = 1')
+            ->order($db->quoteName('created') . ' ASC');
+
+        $db->setQuery($query);
+        $replies = $db->loadObjectList();
+    }
+}
+
+*/
+
 
 /** @var \Joomla\Component\Content\Site\View\Article\HtmlView $this */
 // Create shortcuts to some parameters.
@@ -31,118 +78,88 @@ $info    = $params->get('info_block_position', 0);
 $htag    = 'h2';
 
 // Check if associations are implemented. If they are, define the parameter.
-$assocParam        = (Associations::isEnabled() && $params->get('show_associations'));
-$currentDate       = Factory::getDate()->format('Y-m-d H:i:s');
-$isNotPublishedYet = $this->item->publish_up > $currentDate;
-$isExpired         = !is_null($this->item->publish_down) && $this->item->publish_down < $currentDate;
+#$assocParam        = (Associations::isEnabled() && $params->get('show_associations'));
+#$currentDate       = Factory::getDate()->format('Y-m-d H:i:s');
+#$isNotPublishedYet = $this->item->publish_up > $currentDate;
+#$isExpired         = !is_null($this->item->publish_down) && $this->item->publish_down < $currentDate;
 ?>
 <div class="l-box  l-box--space--edge  longform-content">
-    <article class="com-content-article item-page<?php echo $this->pageclass_sfx; ?>">
-        <meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? Factory::getApplication()->get('language') : $this->item->language; ?>">
-        <?php if ($this->params->get('show_page_heading')) : ?>
-        <div class="page-header">
-            <h1> <?php echo $this->escape($this->params->get('page_heading')); ?> </h1>
-        </div>
-        <?php endif;
-        if (!empty($this->item->pagination) && !$this->item->paginationposition && $this->item->paginationrelative) {
-            echo $this->item->pagination;
-        }
-        ?>
-
-        <?php $useDefList = $params->get('show_modify_date') || $params->get('show_publish_date') || $params->get('show_create_date')
-        || $params->get('show_hits') || $params->get('show_category') || $params->get('show_parent_category') || $params->get('show_author') || $assocParam; ?>
-
-        <?php if ($params->get('show_title')) : ?>
-        <div>
-            <<?php echo $htag; ?>>
-                <?php echo $this->escape($this->item->title); ?>
-            </<?php echo $htag; ?>>
-            <?php if ($this->item->state == ContentComponent::CONDITION_UNPUBLISHED) : ?>
-                <span class="badge bg-warning text-light"><?php echo Text::_('JUNPUBLISHED'); ?></span>
-            <?php endif; ?>
-            <?php if ($isNotPublishedYet) : ?>
-                <span class="badge bg-warning text-light"><?php echo Text::_('JNOTPUBLISHEDYET'); ?></span>
-            <?php endif; ?>
-            <?php if ($isExpired) : ?>
-                <span class="badge bg-warning text-light"><?php echo Text::_('JEXPIRED'); ?></span>
-            <?php endif; ?>
-        </div>
+    <div class="c-discussion-board">
+        <?php if ($comments_enabled) : ?>
+        <article class="c-discussion-board__post  d-background--lightest  d-border-rounded  c-panel">
+        <?php else: ?>
+        <article class="">
         <?php endif; ?>
-        <?php if ($canEdit) : ?>
-            <?php echo LayoutHelper::render('joomla.content.icons', ['params' => $params, 'item' => $this->item]); ?>
-        <?php endif; ?>
+            <meta itemprop="inLanguage" content="<?php echo ($this->item->language === '*') ? Factory::getApplication()->get('language') : $this->item->language; ?>">
 
-        <?php // Content is generated by content plugin event "onContentAfterTitle" ?>
-        <?php echo $this->item->event->afterDisplayTitle; ?>
 
-        <?php if ($useDefList && ($info == 0 || $info == 2)) : ?>
+            <?php if ($params->get('show_title')) : ?>
+            <div<?php if ($comments_enabled) : ?> class="c-discussion-board__post-banner"<?php endif; ?>>
+                <?php if ($comments_enabled) : ?>
+                <div class="l-layout l-row  l-gutter--s  l-flush-edge-gutter">
+                <div class="ff-width-100--30--20">
+                <?php endif; ?>
+                <?php // We don't need anything here yet but it's a better layout. Could be useful in the future though. ?>
+                    <div class="c-discussion-board__header-info"></div>
+                <?php if ($comments_enabled) : ?>
+                    </div>
+                    <div class="ff-width-100--30--80">
+                <?php endif; ?>
+                <<?php echo $htag; ?><?php if ($comments_enabled) : ?> class="c-discussion-board__post-title"<?php endif; ?>>
+                    <?php echo $this->escape($this->item->title); ?>
+                </<?php echo $htag; ?>>
+                <?php if ($comments_enabled) : ?>
+                </div>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+
+
+            <?php // Content is generated by content plugin event "onContentAfterTitle" ?>
+            <?php echo $this->item->event->afterDisplayTitle; ?>
+
+            <?php // Content is generated by content plugin event "onContentBeforeDisplay" ?>
+            <?php echo $this->item->event->beforeDisplayContent; ?>
+
+            <?php if ($comments_enabled) : ?>
+            <div class="l-layout l-row  l-gutter--s  l-flush-edge-gutter">
+            <div class="c-discussion-board__post-info  ff-width-100--30--20">
+            <?php endif; ?>
+
+            <?php if ($canEdit && $comments_enabled) : ?>
+                <?php #echo LayoutHelper::render('joomla.content.icons', ['params' => $params, 'item' => $this->item]); ?>
+            <?php endif; ?>
+
+
             <?php echo LayoutHelper::render('joomla.content.info_block', ['item' => $this->item, 'params' => $params, 'position' => 'above']); ?>
-        <?php endif; ?>
 
-        <?php if ($info == 0 && $params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) : ?>
-            <?php $this->item->tagLayout = new FileLayout('joomla.content.tags'); ?>
 
-            <?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
-        <?php endif; ?>
-
-        <?php // Content is generated by content plugin event "onContentBeforeDisplay" ?>
-        <?php echo $this->item->event->beforeDisplayContent; ?>
-
-        <?php if ((int) $params->get('urls_position', 0) === 0) : ?>
-            <?php echo $this->loadTemplate('links'); ?>
-        <?php endif; ?>
-        <?php if ($params->get('access-view')) : ?>
-            <?php echo LayoutHelper::render('joomla.content.full_image', $this->item); ?>
-            <?php
-            if (!empty($this->item->pagination) && !$this->item->paginationposition && !$this->item->paginationrelative) :
-                echo $this->item->pagination;
-            endif;
-            ?>
-            <?php if (isset($this->item->toc)) :
-                echo $this->item->toc;
-            endif; ?>
-        <div class="com-content-article__body  c-panel  d-background--lightest  d-border--rounded">
-            <?php echo $this->item->text; ?>
-        </div>
-
-            <?php if ($info == 1 || $info == 2) : ?>
-                <?php if ($useDefList) : ?>
-                    <?php echo LayoutHelper::render('joomla.content.info_block', ['item' => $this->item, 'params' => $params, 'position' => 'below']); ?>
-                <?php endif; ?>
-                <?php if ($params->get('show_tags', 1) && !empty($this->item->tags->itemTags)) : ?>
-                    <?php $this->item->tagLayout = new FileLayout('joomla.content.tags'); ?>
-                    <?php echo $this->item->tagLayout->render($this->item->tags->itemTags); ?>
-                <?php endif; ?>
+            <?php if ($comments_enabled) : ?>
+            </div>
+            <div class="c-discussion-board__post-body  ff-width-100--30--80">
             <?php endif; ?>
 
-            <?php
-            if (!empty($this->item->pagination) && $this->item->paginationposition && !$this->item->paginationrelative) :
-                echo $this->item->pagination;
-                ?>
+
+
+            <?php /*<div class="com-content-article__body  c-panel  d-background--lightest  d-border--rounded">*/ ?>
+            <div class="com-content-article__body">
+                <?php echo $this->item->text; ?>
+            </div>
+            <?php if ($comments_enabled) : ?>
+            </div>
+            </div>
             <?php endif; ?>
-            <?php if ((int) $params->get('urls_position', 0) === 1) : ?>
-                <?php echo $this->loadTemplate('links'); ?>
-            <?php endif; ?>
-            <?php // Optional teaser intro text for guests ?>
-        <?php elseif ($params->get('show_noauth') && $user->guest) : ?>
-            <?php echo LayoutHelper::render('joomla.content.intro_image', $this->item); ?>
-            <?php echo HTMLHelper::_('content.prepare', $this->item->introtext); ?>
-            <?php // Optional link to let them register to see the whole article. ?>
-            <?php if ($params->get('show_readmore') && $this->item->fulltext != null) : ?>
-                <?php $menu = Factory::getApplication()->getMenu(); ?>
-                <?php $active = $menu->getActive(); ?>
-                <?php $itemId = $active->id; ?>
-                <?php $link = new Uri(Route::_('index.php?option=com_users&view=login&Itemid=' . $itemId, false)); ?>
-                <?php $link->setVar('return', base64_encode(RouteHelper::getArticleRoute($this->item->slug, $this->item->catid, $this->item->language))); ?>
-                <?php echo LayoutHelper::render('joomla.content.readmore', ['item' => $this->item, 'params' => $params, 'link' => $link]); ?>
-            <?php endif; ?>
-        <?php endif; ?>
-        <?php
-        if (!empty($this->item->pagination) && $this->item->paginationposition && $this->item->paginationrelative) :
-            echo $this->item->pagination;
-            ?>
-        <?php endif; ?>
-        <?php // Content is generated by content plugin event "onContentAfterDisplay" ?>
-        <?php echo $this->item->event->afterDisplayContent; ?>
-    </article>
+
+            <?php // Content is generated by content plugin event "onContentAfterDisplay" ?>
+            <?php echo $this->item->event->afterDisplayContent; ?>
+
+        </article>
+    </div>
 </div>
+<?php
+if (!$comments_enabled) {
+    $doc        = Factory::getDocument();
+    $doc->article = $this->item;
+}
+?>

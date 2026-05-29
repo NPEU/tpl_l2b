@@ -23,9 +23,9 @@ $currentDate = Factory::getDate()->format('Y-m-d H:i:s');
 $link = RouteHelper::getArticleRoute($displayData->slug, $displayData->catid, $displayData->language);
 ?>
 <?php if ($displayData->state == 0 || $params->get('show_title') || ($params->get('show_author') && !empty($displayData->author))) : ?>
-    <div class="c-discussion-board__post__header">
+    <div class="c-discussion-board__post-header">
         <?php if ($params->get('show_title')) : ?>
-            <h2>
+            <h2 class="c-discussion-board__post-title">
                 <?php if ($params->get('link_titles') && ($params->get('access-view') || $params->get('show_noauth', '0') == '1')) : ?>
                     <a href="<?php echo Route::_($link); ?>">
                         <?php echo $this->escape($displayData->title); ?>

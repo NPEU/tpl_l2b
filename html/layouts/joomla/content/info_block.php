@@ -13,18 +13,17 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Language\Text;
 
 $blockPosition = $displayData['params']->get('info_block_position', 0);
-
 ?>
-<dl class="c-discussion-board__post__info-block  c-utilitext l-layout  l-row  l-row--start  l-gutter--xs  l-flush-inline-gutter">
+<dl class="c-discussion-board__post__info-block  c-utilitext  l-layout  l-row  l-row--start  l-gutter--s  l-column-gutter  l-flush-edge-gutter"">
 
     <?php
     if (
         $displayData['position'] === 'above' && ($blockPosition == 0 || $blockPosition == 2)
         || $displayData['position'] === 'below' && ($blockPosition == 1)
     ) : ?>
-        <dt class="l-box">
+        <dt class="l-box" data-hidden="visually">
             <?php if (!$displayData['params']->get('info_block_show_title', 1)) : ?>
-                <?php echo '<span data-hidden="visually">'; ?>
+                <?php echo '<span>'; ?>
             <?php endif; ?>
             <?php echo Text::_('COM_CONTENT_ARTICLE_INFO'); ?>
             <?php if (!$displayData['params']->get('info_block_show_title', 1)) : ?>

@@ -18,6 +18,6 @@ use Joomla\CMS\Language\Text;
     <span class="icon-calendar icon-fw" aria-hidden="true"></span>
     <time datetime="<?php echo HTMLHelper::_('date', $displayData['item']->publish_up, 'c'); ?>">
         <?php #echo Text::sprintf('COM_CONTENT_PUBLISHED_DATE_ON', HTMLHelper::_('date', $displayData['item']->publish_up, Text::_('DATE_FORMAT_LC3'))); ?>
-        <?php echo Text::sprintf('Posted on: %s', HTMLHelper::_('date', $displayData['item']->publish_up, Text::_('DATE_FORMAT_LC3'))); ?>
+        <?php echo Text::sprintf('<span class="text-group">Posted on:</span> <b class="text-group">%s</b>', HTMLHelper::_('date', $displayData['item']->publish_up, Text::_('DATE_FORMAT_LC3'))); ?>
     </time>
 </dd>
