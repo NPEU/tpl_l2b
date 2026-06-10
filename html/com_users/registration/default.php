@@ -67,16 +67,17 @@ use NPEU\Template\L2b\Site\Helper\L2BHelper as TplL2BHelper;
             </div>
             <?php endif; ?>
             <?php $i++; endforeach; ?>
-            <p class="l-layout  l-row  l-row--start">
+            <div class="d-border-bottom"></div>
+            <div class="l-layout  l-row  l-row--start">
                 <span class="l-box  ff-width-100--25--30">
                 </span>
-                <span class="l-box  ff-width-100--25--70" style="margin-block-start: var(--sz-s);">
-                    <span style="border-top: 1px solid var(--base-ui-color-lighter); padding-block-start: var(--sz-s)">By submitting this for you are agreeing to abide by our <a href="https://listen2babytoolkit.npeu.ox.ac.uk/terms-of-use"><span>Terms of Use</span></a></span><br>
+                <span class="l-box  ff-width-100--25--70">
+                    <span>By submitting this for you are agreeing to abide by our <a href="https://listen2babytoolkit.npeu.ox.ac.uk/terms-of-use"><span>Terms of Use</span></a></span><br>
                     <span>
                         <button type="submit"><span><?php echo Text::_('JREGISTER'); ?></span></button>
                     </span>
                 </span>
-            </p>
+            </div>
             <input type="hidden" name="option" value="com_users" />
             <input type="hidden" name="task" value="registration.register" />
             <?php echo HTMLHelper::_('form.token'); ?>

@@ -39,7 +39,7 @@ $show_last = $params->get('showLast', 1);
 
 if ($count > 0) :
 ?>
-<nav aria-label="Breadcrumbs" class="l-layout  l-row  l-row--start  l-gutter--xs  l-box--space--inline-start  mod_breadcrumbs  d-background--dark" data-area="breadcrumbs">
+<nav aria-label="Breadcrumbs" class="l-layout  l-row  l-row--start  l-gutter--xs  Xl-box--space--inline-start  mod_breadcrumbs" data-area="breadcrumbs">
     <p class="l-box  c-utilitext"><?php echo Text::_('MOD_BREADCRUMBS_HERE'); ?> </p>
     <p class="l-box  l-box--expand  c-utilitext">
         <span class="l-layout  l-row  l-row--start"  role="list" itemscope="" itemtype="https://schema.org/BreadcrumbList">

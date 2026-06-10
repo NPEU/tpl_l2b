@@ -102,7 +102,7 @@ ob_start();
     <footer aria-label="Page" data-landmark-index="3">
         <div data-fs-text="center">
 
-            <p class="l-balance  d-border--top--thick">
+            <p class="l-balance d-border-top  d-border--thick">
 
                 <!-- TODO: this should come from a module, probably: -->
                 <span class="l-box  l-box--centerX" data-fs-block="inline padding">
@@ -126,7 +126,7 @@ ob_start();
                 <!-- END -->
             </p>
 
-            <div class="l-layout  d-border--top--thick">
+            <div class="l-layout d-border-top  d-border--thick">
                 <div class="l-box  l-box--space--edge">
                     <!-- TODO: this should come from a module, probably: -->
                     <div id="mod-custom134" class="mod-custom custom">

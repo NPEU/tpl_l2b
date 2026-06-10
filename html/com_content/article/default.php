@@ -28,45 +28,6 @@ use NPEU\Template\L2b\Site\Helper\L2BHelper as TplL2BHelper;
 $comments_enabled = TplL2BHelper::has_comments_enabled();
 
 
-/*
-$replies = [];
-#$replyUrl = false;
-
-#echo '<pre>'; var_dump($this->item->catid); echo '</pre>';
-
-if (TopicRepliesHelper::isDiscussionBoard((int) $this->item->catid)) {
-
-    $topic = $this->item;
-
-    #https://l2bdev.npeu.ox.ac.uk/component/content?task=article.add&return=aHR0cHM6Ly9sMmJkZXYubnBldS5veC5hYy51ay9kaXNjdXNzaW9uLWJvYXJk&a_id=0&catid=8
-    #$replyUrl = Route::_('index.php?option=com_content&view=form&layout=edit&replyto=' . (int) $topic->id);
-    #$replyUrl = Route::_('index.php?option=com_content&task=article.add&replyto=' . (int) $topic->id);
-
-    $db = Factory::getContainer()->get(DatabaseInterface::class);
-
-    $replyCatId = (int) $db->setQuery(
-        $db->getQuery(true)
-            ->select($db->quoteName('reply_category_id'))
-            ->from($db->quoteName('#__topic_replies'))
-            ->where($db->quoteName('topic_article_id') . ' = ' . (int) $topic->id)
-    )->loadResult();
-
-#echo '<pre>'; var_dump($replyCatId); echo '</pre>';
-    if ($replyCatId > 0) {
-        $query = $db->getQuery(true)
-            ->select('*')
-            ->from($db->quoteName('#__content'))
-            ->where($db->quoteName('catid') . ' = ' . (int) $replyCatId)
-            ->where($db->quoteName('state') . ' = 1')
-            ->order($db->quoteName('created') . ' ASC');
-
-        $db->setQuery($query);
-        $replies = $db->loadObjectList();
-    }
-}
-
-*/
-
 
 /** @var \Joomla\Component\Content\Site\View\Article\HtmlView $this */
 // Create shortcuts to some parameters.
@@ -77,11 +38,7 @@ $info    = $params->get('info_block_position', 0);
 #$htag    = $this->params->get('show_page_heading') ? 'h2' : 'h3';
 $htag    = 'h2';
 
-// Check if associations are implemented. If they are, define the parameter.
-#$assocParam        = (Associations::isEnabled() && $params->get('show_associations'));
-#$currentDate       = Factory::getDate()->format('Y-m-d H:i:s');
-#$isNotPublishedYet = $this->item->publish_up > $currentDate;
-#$isExpired         = !is_null($this->item->publish_down) && $this->item->publish_down < $currentDate;
+
 ?>
 <div class="l-box  l-box--space--edge  longform-content">
     <div class="c-discussion-board">

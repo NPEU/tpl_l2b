@@ -113,8 +113,8 @@ $doc->include_script = true;
 #$doc->include_joomla_scripts = true;
 #echo '<pre>'; var_dump($page_head_data); echo '</pre>'; exit;
 #exit;
-include(dirname(dirname(dirname(__DIR__))) . '/layouts/partial-slimselect.php');
-include(dirname(dirname(dirname(__DIR__))) . '/layouts/partial-a11y-dialog.php');
+#include(dirname(dirname(dirname(__DIR__))) . '/layouts/partial-slimselect.php');
+#include(dirname(dirname(dirname(__DIR__))) . '/layouts/partial-a11y-dialog.php');
 
 ?>
 <?php #echo TplL2BHelper::get_messages(); ?>

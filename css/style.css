@@ -1002,6 +1002,10 @@
     ================
 */
 /*
+    Forms
+    =====
+*/
+/*
     Hero
     ====
 */
@@ -1971,7 +1975,8 @@ svg[width="20"][height="20"] {
     border-style: var(--input-border-style, var(--base-border-style));
     border-color: var(--input-border-color, var(--base-border-color));
     border-radius: var(--input-border-radius, var(--base-border-radius));
-    background-color: var(--input-background-color, #fff);
+    --background-color: var(--input-background-color, #fff);
+    background-color: var(--background-color);
     font-size: inherit;
     font-weight: inherit;
     font-style: inherit;
@@ -5812,12 +5817,53 @@ a[href][rel~=external].c-badge.c-badge:focus::after {
   padding: var(--sz-s);
 }
 
+.c-form.c-form > * {
+  vertical-align: middle;
+  margin: 0;
+}
+.c-form .c-form__group {
+  display: inline-block;
+  white-space: nowrap;
+}
+.c-form {
+  /*
+      1. Collapse whitespace.
+      2. Prevent extra height being added.
+  */
+}
+.c-form .c-form__composite {
+  display: inline-flex; /* 1 */
+  flex-wrap: wrap;
+  align-items: center;
+  vertical-align: middle; /* 2 */
+  max-width: 100%;
+}
+.c-form .c-form__composite > * {
+  vertical-align: top; /* 2 */
+  flex: 0 1 auto;
+}
+.c-form .c-form__composite > :not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.c-form .c-form__composite > :not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.c-form .c-form__composite--fill {
+  width: 100%;
+}
+.c-form .c-form__composite__expand {
+  flex-grow: 1;
+  width: auto !important;
+}
+
 .c-hero.c-hero {
   position: relative;
   overflow: hidden;
 }
 .c-hero .c-hero__heading {
-  --background-color: var(--base-ui-color-dark);
+  --background-color: var(--base-ui-color-darker);
   background: var(--background-color);
   padding-block: var(--sz-m);
   padding-inline: var(--sz-l);
@@ -5973,27 +6019,27 @@ html[lang] img[height="80"] {
   background: var(--background-color);
 }
 
-.d-background--dark {
+.d-background--dark.d-background--dark {
   --background-color: var(--base-ui-color-dark);
 }
 
-.d-background--darker {
+.d-background--darker.d-background--darker {
   --background-color: var(--base-ui-color-darker) ;
 }
 
-.d-background--darkest {
+.d-background--darkest.d-background--darkest {
   --background-color: var(--base-ui-color-darkest) ;
 }
 
-.d-background--light {
+.d-background--light.d-background--light {
   --background-color: var(--base-ui-color-light) ;
 }
 
-.d-background--lighter {
+.d-background--lighter.d-background--lighter {
   --background-color: var(--base-ui-color-lighter) ;
 }
 
-.d-background--lightest {
+.d-background--lightest.d-background--lightest {
   --background-color: var(--base-ui-color-lightest);
 }
 
@@ -6272,14 +6318,43 @@ html[lang] img[height="80"] {
   --background-color: var(--color-error-lightest);
 }
 
+[class*=d-border] {
+  --current-border-width: var(--border-width, var(--base-border-width));
+  border-color: var(--border-color, var(--base-ui-color));
+  border-style: var(--border-style, var(--base-border-style));
+  border-top-width: 0;
+  border-bottom-width: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+
+.d-border {
+  border-width: var(--current-border-width);
+}
+
+.d-border-top {
+  border-top-width: var(--current-border-width);
+}
+
+.d-border-bottom {
+  border-bottom-width: var(--current-border-width);
+}
+
+.d-border-left {
+  border-left-width: var(--current-border-width);
+}
+
+.d-border-right {
+  border-right-width: var(--current-border-width);
+}
+
 .d-border--thick {
-  border: 0.2rem solid var(--base-ui-color);
+  --current-border-width: calc(var(--border-width, var(--base-border-width)) * 2);
 }
 
-.d-border--top--thick {
-  border-top: 0.2rem solid var(--base-ui-color);
-}
-
+/*.d-border--top--thick {
+    border-top: 0.2rem solid var(--base-ui-color);
+}*/
 .d-border--rounded.d-border--rounded {
   border-radius: var(--base-border-radius);
 }
@@ -6381,7 +6456,8 @@ img[src="/images/thumbnails/L2B-Toolkit-Graphic-v2-only.png"] {
   margin-inline: auto;
 }
 
-.user-form {
+.user-form,
+.search-results {
   max-width: 80ch;
   margin-inline: auto;
   position: relative;
@@ -6400,6 +6476,10 @@ img[src="/images/thumbnails/L2B-Toolkit-Graphic-v2-only.png"] {
 
 .user-form input:not([type=checkbox]):not([type=radio]) {
   width: 100%;
+}
+
+.search-results li.result__item {
+  margin-inline-start: 0;
 }
 
 html[lang] input[type=checkbox],

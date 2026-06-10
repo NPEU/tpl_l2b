@@ -86,12 +86,26 @@ $menu_item_params = $menu_item->getParams();
                     </span>
                 </p>
             </div>
+            <div class="l-layout  l-row  l-row--end  l-gutter--s  l-flush-block-gutter  d-background--dark">
+                <form action="/search" id="searchform" class="c-form" method="GET">
+                    <div class="c-form__composite">
+                        <input type="search" class="search-form__field" id="search" placeholder="Search" name="q" value="" aria-label="Search">
+                        <button class="" type="submit" id="search-button" aria-labelledby="search-button-label">
 
+                            <?php echo BlocksHelper::renderUse('search', [], null, '<text visibility="hidden" id="search-button-label">Search</text>'); ?>
+                        </button>
+                    </div>
+                </form>
+            </div>
 
         </header>
         <!-- END -->
         <?php if (!empty($main_breadcumbs)) : ?>
-        <?php echo $main_breadcumbs; ?>
+        <div class="l-layout  l-row  l-gutter--s  l-flush-block-gutter  d-background--darker">
+            <div class="l-box  ffX-width-100--40--50">
+            <?php echo $main_breadcumbs; ?>
+            </div>
+        </div>
         <?php endif; ?>
     </div>
 
@@ -141,7 +155,7 @@ $menu_item_params = $menu_item->getParams();
             <div data-fs-text="center">
 
 
-                <p class="l-balance  d-border--top--thick">
+                <p class="l-balance  d-border-top  d-border--thick">
 
                     <!-- TODO: this should come from a module, probably: -->
                     <span class="l-box  l-box--centerX" data-fs-block="inline padding">
@@ -165,7 +179,7 @@ $menu_item_params = $menu_item->getParams();
                     <!-- END -->
                 </p>
 
-                <div class="l-layout  d-border--top--thick">
+                <div class="l-layout  d-border-top  d-border--thick">
                     <div class="l-box  l-box--space--edge">
                         <!-- TODO: this should come from a module, probably: -->
                         <div id="mod-custom134" class="mod-custom custom">

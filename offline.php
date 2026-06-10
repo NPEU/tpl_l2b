@@ -726,7 +726,7 @@ ob_start();
 
 
 </header>
-<div class="l-box  l-box--expand  d-border--bottom--thick">
+<div class="l-box  l-box--expand  d-border-bottom  d-border--thick">
     <main id="main" aria-labelledby="offline_heading">
         <div class="l-layout  l-row  l-gutter--l  l-flush-edge-gutter">
             <div class="l-layout__inner">
@@ -774,7 +774,7 @@ ob_start();
 <div class="l-box">
 
     <footer aria-label="Page" data-fs-text="center">
-        <div class="d-border--bottom--thick">
+        <div class="d-border-bottom  d-border--thick">
             <div class="l-layout  l-row">
                 <div class="l-layout__inner">
                     <div class="l-box  ff-width-100--40--50" data-position="6-footer-mid-left">
@@ -806,7 +806,7 @@ ob_start();
             </div>
         </div>
 
-        <div class="d-border--bottom--thick">
+        <div class="d-border-bottom  d-border--thick">
             <div class="l-layout  l-gutter  l-distribute  l-distribute--balance-top  l--basis-20">
                 <p class="l-layout__inner">
                     <span class="l-box  l-box--center">
@@ -884,13 +884,6 @@ ob_start();
                                     © NPEU <?php echo date('Y'); ?>
                                 </span>
                             </span>
-                        </p>
-                    </div>
-                    <div class="l-box  l-box--center">
-                        <p class="c-panel  c-panel--rounded  d-background--white  d-border--thick">
-                            <a href="https://www.npeu.ox.ac.uk/about/athena-swan" class="c-badge  c-badge--limit-height">
-                                <img src="/assets/images/brand-logos/accolade/athena-swan-silver-logo.svg" onerror="this.src='/assets/images/brand-logos/accolade/athena-swan-silver-logo.png'; this.onerror=null;" alt="Logo: Athena Swan Silver Award" height="80" width="129">
-                            </a>
                         </p>
                     </div>
                 </div>

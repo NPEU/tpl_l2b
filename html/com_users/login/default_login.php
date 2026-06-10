@@ -22,15 +22,16 @@ $registry = $session->get('registry');
 $jinput = Factory::getApplication()->input;
 
 $return = $registry->get('users.login.form.data.return', false);
+#echo '<pre>'; var_dump($return); echo '</pre>'; #exit;
 if (!$return) {
     $return = '/user-profile';
 } else {
     $return = base64_encode($return);
 }
-#echo '<pre>'; var_dump($return); echo '</pre>'; exit;
+#echo '<pre>'; var_dump($return); echo '</pre>'; #exit;
 #echo '<pre>'; var_dump($jinput->get('return', '/user-profile')); echo '</pre>'; exit;
-$return = $jinput->get('return', $return);
-
+#$return = $jinput->get('return', $return);
+#echo '<pre>'; var_dump($return); echo '</pre>'; exit;
 ?>
 <?php #echo TplL2bHelper::get_messages(); ?>
 
