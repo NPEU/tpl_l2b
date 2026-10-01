@@ -62,25 +62,25 @@ function block_classes($row, $n) {
         <?php endif; ?>
 
         <?php if (!empty($row['block_1_id'])) : ?>
-        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-1<?php echo block_classes($row, 1); ?>" <?php echo module_data($row, 1); ?>>
+        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-1<?php echo block_classes($row, 1); ?>" <?php echo module_data($row, 1); ?> id="<?php echo 'block-' . $i . '-1'; ?>">
             <?php echo HTMLHelper::_('content.prepare', '{loadmoduleid ' . $row['block_1_id'] . '}'); ?>
         </div>
         <?php endif; ?>
 
         <?php if (!empty($row['block_2_id'])) : ?>
-        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-2<?php echo block_classes($row, 2); ?>" <?php echo module_data($row, 2); ?>>
+        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-2<?php echo block_classes($row, 2); ?>" <?php echo module_data($row, 2); ?> id="<?php echo 'block-' . $i . '-2'; ?>">
             <?php echo HTMLHelper::_('content.prepare', '{loadmoduleid ' . $row['block_2_id'] . '}'); ?>
         </div>
         <?php endif; ?>
 
         <?php if (!empty($row['block_3_id'])) : ?>
-        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-3<?php echo block_classes($row, 3); ?>" <?php echo module_data($row, 3); ?>>
+        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-3<?php echo block_classes($row, 3); ?>" <?php echo module_data($row, 3); ?> id="<?php echo 'block-' . $i . '-3'; ?>">
             <?php echo HTMLHelper::_('content.prepare', '{loadmoduleid ' . $row['block_3_id'] . '}'); ?>
         </div>
         <?php endif; ?>
 
         <?php if (!empty($row['block_4_id'])) : ?>
-        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-4<?php echo block_classes($row, 4); ?>" <?php echo module_data($row, 4); ?>>
+        <div class="l-layout--blocks-grid__block  l-layout--blocks-grid__block-4<?php echo block_classes($row, 4); ?>" <?php echo module_data($row, 4); ?> id="<?php echo 'block-' . $i . '-4'; ?>">
             <?php echo HTMLHelper::_('content.prepare', '{loadmoduleid ' . $row['block_4_id'] . '}'); ?>
         </div>
         <?php endif; ?>

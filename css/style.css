@@ -6614,4 +6614,22 @@ html[lang] .close-button:hover, html[lang] .close-button:active {
   display: inline-block;
 }
 
+/*
+    Highlight :target-ed headings
+    Note I can't selected the whole section without it being wrapped in something, and I don't want
+    to mess around with that.
+*/
+main :target {
+  animation: target-fade 3s 1;
+}
+
+@keyframes target-fade {
+  0% {
+    box-shadow: 0 0 0 1.2rem rgba(124, 195, 225, 0.4), 0 0 0 100vmax rgba(124, 195, 225, 0.4) inset;
+  }
+  100% {
+    box-shadow: 0 0 0 1.2rem rgba(124, 195, 225, 0), 0 0 0 100vmax rgba(124, 195, 225, 0) inset;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
